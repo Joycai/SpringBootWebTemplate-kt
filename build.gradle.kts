@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
+    kotlin("kapt") version "1.8.22"
 }
 
 group = "com.example"
@@ -13,6 +14,8 @@ version = "0.0.1-SNAPSHOT"
 java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
+
+var mapStructVersion = "1.5.3.Final"
 
 configurations {
     compileOnly {
@@ -30,11 +33,14 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+
+    // mapstruct
+    implementation("org.mapstruct:mapstruct:${mapStructVersion}")
+    kapt("org.mapstruct:mapstruct-processor:${mapStructVersion}")
+    testAnnotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
 }
 
 tasks.withType<KotlinCompile> {
