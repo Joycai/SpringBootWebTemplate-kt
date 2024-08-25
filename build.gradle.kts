@@ -1,11 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.7.13"
-    id("io.spring.dependency-management") version "1.0.15.RELEASE"
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
-    kotlin("kapt") version "1.8.22"
+    kotlin("jvm") version "1.9.25"
+    kotlin("plugin.spring") version "1.9.25"
+    id("org.springframework.boot") version "3.3.3"
+    id("io.spring.dependency-management") version "1.1.6"
 }
 
 group = "com.example"
@@ -15,7 +14,7 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
-var mapStructVersion = "1.5.3.Final"
+var mapStructVersion = "1.5.5.Final"
 
 configurations {
     compileOnly {
@@ -39,14 +38,12 @@ dependencies {
 
     // mapstruct
     implementation("org.mapstruct:mapstruct:${mapStructVersion}")
-    kapt("org.mapstruct:mapstruct-processor:${mapStructVersion}")
     testAnnotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "17"
     }
 }
 
